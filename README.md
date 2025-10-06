@@ -27,7 +27,7 @@ README.md
 
 ## Roadmap
 - [x] Scaffold **frontend** (Vite + Tailwind + shadcn/ui + react-big-calendar).
-- [ ] Scaffold **backend** (Express/Nest + Prisma + PostgreSQL + Docker Compose).
+- [x] Scaffold **backend** (Express/Nest + Prisma + PostgreSQL + Docker Compose).
 - [ ] Prisma modeling: Client, Reservation, Package, Service, Payment, User.
 - [ ] Seed sample data (clients/packages/services).
 - [ ] Basic Auth (login/logout, roles).
