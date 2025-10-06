@@ -1,0 +1,30 @@
+services:
+  db:
+    image: postgres:16
+    container_name: jmares_db
+    environment:
+      POSTGRES_USER: jmares
+      POSTGRES_PASSWORD: jmares
+      POSTGRES_DB: jmares_reservas
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: jmares_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com # <-- cambia esto
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5051:80" # 5051 para evitar choques
+    depends_on:
+      - db
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    restart: unless-stopped
+
+volumes:
+  db_data:
+  pgadmin_data:

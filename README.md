@@ -26,8 +26,8 @@ README.md
 - Search by client/date with basic filters.
 
 ## Roadmap
-- [ ] Scaffold **frontend** (Vite + Tailwind + shadcn/ui + react-big-calendar).
-- [ ] Scaffold **backend** (Express/Nest + Prisma + PostgreSQL + Docker Compose).
+- [x] Scaffold **frontend** (Vite + Tailwind + shadcn/ui + react-big-calendar).
+- [x] Scaffold **backend** (Express/Nest + Prisma + PostgreSQL + Docker Compose).
 - [ ] Prisma modeling: Client, Reservation, Package, Service, Payment, User.
 - [ ] Seed sample data (clients/packages/services).
 - [ ] Basic Auth (login/logout, roles).
