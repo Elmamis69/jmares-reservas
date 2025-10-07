@@ -5,22 +5,31 @@
   "main": "dist/index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
+    "seed": "tsx prisma/seed.ts",
     "build": "tsc -p .",
     "start": "node dist/index.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio"
   },
-  "devDependencies": {
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "devDependencFies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
+    "@types/node": "^24.7.0",
     "prisma": "^6.16.3",
     "tsx": "^4.20.6"
   },
   "dependencies": {
     "@prisma/client": "^6.16.3",
     "cors": "^2.8.5",
+    "date-fns": "^4.1.0",
     "dotenv": "^17.2.3",
     "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.20.6"
   }
 }

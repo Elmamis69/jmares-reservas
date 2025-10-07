@@ -7,34 +7,150 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+/**
+ * ========= Core =========
+ */
 model Client {
   id           String        @id @default(cuid())
   name         String
   phone        String?
-  email        String?
+  email        String?       @unique
   notes        String?
   reservations Reservation[]
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
+
+  @@index([name])
+  @@index([phone])
+  @@index([email])
 }
 
 model Reservation {
   id        String   @id @default(cuid())
-  date      DateTime
+  date      DateTime // fecha del evento
   startTime DateTime
   endTime   DateTime
   status    Status
   attendees Int?
   total     Decimal  @db.Decimal(10, 2)
   deposit   Decimal? @db.Decimal(10, 2)
-  clientId  String
-  client    Client   @relation(fields: [clientId], references: [id])
+
+  clientId String
+  client   Client @relation(fields: [clientId], references: [id])
+
+  packageId String?
+  package   Package? @relation(fields: [packageId], references: [id])
+
+  services ReservationService[] // relación N:M con Service
+  payments Payment[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([date])
+  @@index([status])
 }
 
+/**
+ * ========= Catálogo =========
+ */
+model Package {
+  id          String  @id @default(cuid())
+  name        String
+  basePrice   Decimal @db.Decimal(10, 2)
+  description String?
+  active      Boolean @default(true)
+
+  reservations Reservation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([name])
+}
+
+model Service {
+  id          String  @id @default(cuid())
+  name        String
+  price       Decimal @db.Decimal(10, 2)
+  description String?
+  active      Boolean @default(true)
+
+  reservations ReservationService[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([name])
+}
+
+/**
+ * ========= N:M Reservation <-> Service =========
+ */
+model ReservationService {
+  reservationId String
+  serviceId     String
+  quantity      Int    @default(1)
+
+  reservation Reservation @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+  service     Service     @relation(fields: [serviceId], references: [id], onDelete: Restrict)
+
+  @@id([reservationId, serviceId]) // PK compuesta
+}
+
+/**
+ * ========= Pagos =========
+ */
+model Payment {
+  id            String      @id @default(cuid())
+  reservationId String
+  reservation   Reservation @relation(fields: [reservationId], references: [id], onDelete: Cascade)
+
+  amount    Decimal       @db.Decimal(10, 2)
+  method    PaymentMethod
+  reference String?
+  paidAt    DateTime      @default(now())
+
+  createdAt DateTime @default(now())
+
+  @@index([reservationId])
+  @@index([paidAt])
+}
+
+/**
+ * ========= Usuarios (auth simple) =========
+ */
+model User {
+  id           String @id @default(cuid())
+  name         String
+  email        String @unique
+  role         Role   @default(STAFF)
+  passwordHash String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([email])
+  @@index([role])
+}
+
+/**
+ * ========= Enums =========
+ */
 enum Status {
   APARTADO
   CONFIRMADO
   CANCELADO
+}
+
+enum PaymentMethod {
+  STRIPE
+  MP
+  EFECTIVO
+  TRANSFER
+}
+
+enum Role {
+  ADMIN
+  STAFF
 }
