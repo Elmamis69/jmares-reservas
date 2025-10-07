@@ -1,20 +1,15 @@
 {
   "compilerOptions": {
-    /* Salida y compatibilidad */
     "target": "ES2020",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "outDir": "dist",
-
-    /* Comportamiento y chequeos */
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-
-    /*  Agregado importante */
-    "types": ["node"],              //  permite usar process, __dirname, etc.
-    "resolveJsonModule": true       //  útil si luego importas archivos .json
+    "outDir": "dist",
+    "types": ["node"],
+    "resolveJsonModule": true
   },
-  "include": ["src", "prisma"]      //  agrega también la carpeta prisma (por seed.ts)
+  "include": ["src", "prisma"]
 }

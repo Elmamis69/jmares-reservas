@@ -1,14 +1,18 @@
 import 'dotenv/config'
-import express from 'express'
+import express, { type Request, type Response } from 'express'
 import cors from 'cors'
+import auth from './routes/auth.js'
 import clients from './routes/clients.js'
+import { requireAuth, requireRole } from './middleware/auth.js'
 
 const app = express()
 app.use(cors())
 app.use(express.json())
-app.use('/api/clients', clients)
 
-app.get('/health', (_req, res) => {
+app.use('/api/auth', auth)
+app.use('/api/clients', requireAuth, requireRole('ADMIN', 'STAFF'), clients)
+
+app.get('/health', (_req: Request, res: Response) => {
   res.status(200).json({ status: 'ok', env: process.env.NODE_ENV ?? 'dev' })
 })
 
