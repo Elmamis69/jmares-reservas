@@ -41,7 +41,7 @@ README.md
 ## Environment Variables (placeholder)
 - **FRONTEND:** `VITE_API_URL`
 - **BACKEND:** `DATABASE_URL`, `JWT_SECRET`, `STRIPE_SECRET` / `MERCADOPAGO_ACCESS_TOKEN`
-
+ 
 ## Contribution
 - Branch conventions: `feat/*`, `fix/*`, `chore/*`, `docs/*`.
 - Keep PRs small and descriptive.
