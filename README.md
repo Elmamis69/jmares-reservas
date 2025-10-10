@@ -31,7 +31,7 @@ README.md
 - [x] Prisma modeling: Client, Reservation, Package, Service, Payment, User.
 - [x] Seed sample data (clients/packages/services).
 - [x] Basic Auth (login/logout, roles).
-- [ ] CRUD **Client** (API + UI).
+- [x] CRUD **Client** (API + UI).
 - [ ] CRUD **Package/Service** (API + UI).
 - [ ] CRUD **Reservation** (API + UI + calendar).
 - [ ] Record **Payments** (API + UI).
