@@ -32,3 +32,37 @@ export const updateClient = (id: string, data: Partial<Client>) =>
   api<Client>(`/api/clients/${id}`, { method: "PUT", body: JSON.stringify(data) })
 export const deleteClient = (id: string) =>
   api<void>(`/api/clients/${id}`, { method: "DELETE" })
+
+// --- Reservations ---
+export type Reservation = {
+  id: string
+  clientId: string
+  date: string
+  startTime: string
+  endTime: string
+  status: "APARTADO" | "CONFIRMADO" | "CANCELADO"
+  attendees?: number | null
+  total?: number | null
+  deposit?: number | null
+  packageId?: string | null
+  notes?: string | null
+  createdAt: string
+  updatedAt: string
+}
+
+export const listReservations = (params?: { start?: Date; end?: Date }) => {
+  const q = new URLSearchParams()
+  if (params?.start) q.set("start", params.start.toISOString())
+  if (params?.end) q.set("end", params.end.toISOString())
+  const qs = q.toString() ? `?${q.toString()}` : ""
+  return api<Reservation[]>(`/api/reservations${qs}`)
+}
+
+export const createReservation = (data: Partial<Reservation>) =>
+  api<Reservation>("/api/reservations", { method: "POST", body: JSON.stringify(data) })
+
+export const updateReservation = (id: string, data: Partial<Reservation>) =>
+  api<Reservation>(`/api/reservations/${id}`, { method: "PUT", body: JSON.stringify(data) })
+
+export const deleteReservation = (id: string) =>
+  api<void>(`/api/reservations/${id}`, { method: "DELETE" })

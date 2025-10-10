@@ -32,8 +32,8 @@ model Reservation {
   endTime   DateTime
   status    Status
   attendees Int?
-  total     Decimal  @db.Decimal(10, 2)
-  deposit   Decimal? @db.Decimal(10, 2)
+  total     Decimal  @db.Decimal(10, 2) @default(0)
+  deposit   Decimal? @db.Decimal(10, 2) @default(0)
 
   clientId String
   client   Client @relation(fields: [clientId], references: [id])
