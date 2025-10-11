@@ -37,6 +37,7 @@ export const deleteClient = (id: string) =>
 export type Reservation = {
   id: string
   clientId: string
+  client?: { id: string; name: string } //
   date: string
   startTime: string
   endTime: string
