@@ -5,6 +5,8 @@ import auth from './routes/auth.js'
 import clients from './routes/clients.js'
 import { requireAuth, requireRole } from './middleware/auth.js'
 import reservations from './routes/reservations.js'
+import services from './routes/services.js'
+import packages from './routes/packages.js'
 
 const app = express()
 app.use(cors())
@@ -13,6 +15,8 @@ app.use(express.json())
 app.use('/api/auth', auth)
 app.use('/api/clients', requireAuth, requireRole('ADMIN', 'STAFF'), clients)
 app.use('/api/reservations', requireAuth, requireRole('ADMIN','STAFF'), reservations)
+app.use('/api/services', requireAuth, requireRole('ADMIN','STAFF'), services)
+app.use('/api/packages', requireAuth, requireRole('ADMIN','STAFF'), packages)
 
 app.get('/health', (_req: Request, res: Response) => {
   res.status(200).json({ status: 'ok', env: process.env.NODE_ENV ?? 'dev' })
