@@ -33,7 +33,7 @@ README.md
 - [x] Basic Auth (login/logout, roles).
 - [x] CRUD **Client** (API + UI).
 - [ ] CRUD **Package/Service** (API + UI).
-- [ ] CRUD **Reservation** (API + UI + calendar).
+- [x] CRUD **Reservation** (API + UI + calendar).
 - [ ] Record **Payments** (API + UI).
 - [ ] Deploy **staging** environment (Render/Railway + Vercel/Netlify).
 - [ ] Payment integration (Stripe/Mercado Pago sandbox).
