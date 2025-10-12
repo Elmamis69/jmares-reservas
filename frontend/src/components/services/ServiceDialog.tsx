@@ -53,8 +53,13 @@ export default function ServiceDialog({ open, onOpenChange, initial, onSaved }: 
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent>
-                <DialogHeader><DialogTitle>{initial ? "Editar servicio" : "Nuevo servicio"}</DialogTitle></DialogHeader>
+            <DialogContent aria-describedby="svc-desc">
+                <DialogHeader>
+                    <DialogTitle>{initial ? "Editar servicio" : "Nuevo servicio"}</DialogTitle>
+                    <DialogDescription id="svc-desc" className="sr-only">
+                        Formulario para {initial ? "editar" : "crear"} un servicio.
+                    </DialogDescription>
+                </DialogHeader>
 
                 <div className="space-y-3">
                     <div>
@@ -73,19 +78,20 @@ export default function ServiceDialog({ open, onOpenChange, initial, onSaved }: 
                 </div>
 
                 <DialogFooter>
-                    {initial && <Button variant="destructive" onClick={handleDelete} disabled={saving}>Eliminar</Button>}
-                    <Button variant="outline" onClick={() => onOpenChange(false)} disabled={saving}>Cancelar</Button>
-                    <Button onClick={handleSave} disabled={saving || !name}>Guardar</Button>
+                    {initial && (
+                        <Button variant="destructive" onClick={handleDelete} disabled={saving}>
+                            Eliminar
+                        </Button>
+                    )}
+                    <Button variant="outline" onClick={() => onOpenChange(false)} disabled={saving}>
+                        Cancelar
+                    </Button>
+                    <Button onClick={handleSave} disabled={saving || !name}>
+                        Guardar
+                    </Button>
                 </DialogFooter>
-            </DialogContent>
-            <DialogContent aria-describedby="svc-desc">
-                <DialogHeader>
-                    <DialogTitle>{initial ? "Editar servicio" : "Nuevo servicio"}</DialogTitle>
-                    <DialogDescription id="svc-desc" className="sr-only">
-                        Formulario para {initial ? "editar" : "crear"} un servicio.
-                    </DialogDescription>
-                </DialogHeader>
             </DialogContent>
         </Dialog>
     )
+
 }
