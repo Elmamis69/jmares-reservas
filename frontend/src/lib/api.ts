@@ -24,6 +24,55 @@ export async function api<T = any>(path: string, init: RequestInit = {}): Promis
   return (res.status === 204 ? (undefined as T) : res.json())
 }
 
+// --- Services ---
+export type Service = {
+  id: string
+  name: string
+  price: number | string
+  description?: string | null
+  active: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export async function listServices() {
+  return api<Service[]>("/api/services")
+}
+export async function createService(data: { name: string; price: number; description?: string | null; active?: boolean }) {
+  return api<Service>("/api/services", { method: "POST", body: JSON.stringify(data) })
+}
+export async function updateService(id: string, data: Partial<{ name: string; price: number; description?: string | null; active?: boolean }>) {
+  return api<Service>(`/api/services/${id}`, { method: "PUT", body: JSON.stringify(data) })
+}
+export async function deleteService(id: string) {
+  return api<void>(`/api/services/${id}`, { method: "DELETE" })
+}
+
+// --- Packages ---
+export type Package = {
+  id: string
+  name: string
+  basePrice: number | string
+  description?: string | null
+  active: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export async function listPackages() {
+  return api<Package[]>("/api/packages")
+}
+export async function createPackage(data: { name: string; basePrice: number; description?: string | null; active?: boolean }) {
+  return api<Package>("/api/packages", { method: "POST", body: JSON.stringify(data) })
+}
+export async function updatePackage(id: string, data: Partial<{ name: string; basePrice: number; description?: string | null; active?: boolean }>) {
+  return api<Package>(`/api/packages/${id}`, { method: "PUT", body: JSON.stringify(data) })
+}
+export async function deletePackage(id: string) {
+  return api<void>(`/api/packages/${id}`, { method: "DELETE" })
+}
+
+
 // CRUD
 export const listClients = () => api<Client[]>("/api/clients")
 export const createClient = (data: Partial<Client>) =>

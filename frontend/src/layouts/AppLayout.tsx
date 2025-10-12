@@ -1,4 +1,4 @@
-import { Link, Outlet, useNavigate } from "react-router-dom"
+import { Link, Outlet, useNavigate, NavLink } from "react-router-dom"
 import { clearToken } from "@/lib/auth"
 
 export default function AppLayout() {
@@ -15,7 +15,9 @@ export default function AppLayout() {
           <Link to="/dashboard" className="font-semibold">Jardín Mares</Link>
           <Link to="/dashboard">Dashboard</Link>
           <Link to="/calendar">Calendario</Link>
-          <Link to="/clients">Clientes</Link> {/* 👈 NUEVO */}
+          <Link to="/clients">Clientes</Link>
+          <NavLink to="/services">Servicios</NavLink>
+          <NavLink to="/packages">Paquetes</NavLink>
           <button onClick={logout} className="ml-auto underline text-slate-700">Salir</button>
         </nav>
       </header>

@@ -10,6 +10,8 @@ import ClientsPage from "@/pages/Clients"
 import RequireAuth from "@/components/RequireAuth"
 
 import "./index.css"
+import ServicesPage from "./pages/Services"
+import PackagesPage from "./pages/Packages"
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -22,6 +24,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/calendar" element={<CalendarPage />} />
             <Route path="/clients" element={<ClientsPage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/packages" element={<PackagesPage />} />
           </Route>
         </Route>
         <Route path="*" element={<Navigate to="/login" replace />} />
